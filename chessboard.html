@@ -1,0 +1,205 @@
+<html>
+<head>
+
+</head>
+<body>
+    <div id="controls">
+        <button id="resetButton">Reset Board</button>            
+    </div>        
+    <div id="ChessBoardContainer">        
+    </div>
+    <div id="CaptureContainer">                
+    </div>    
+    
+    <script>       
+        var handlers = {
+            dragged : '',
+            onDragStartHandler : function(event)
+            {
+                dragged = event.target;            
+            },
+            onDragEndHandler : function(event)
+            {
+                dragged = null;            
+            },
+            onDropHandler : function(event)
+            {
+                const target = event.target;
+                if (target)
+                {                
+                    event.preventDefault();
+                    if (target.innerHTML!='') 
+                    {
+                        var cell = document.getElementById(target.id).parentElement;
+                        var captureBox = document.getElementById("CaptureContainer");
+                        captureBox.appendChild(target);
+                        cell.appendChild(dragged);
+                    }                    
+                    else 
+                    {
+                        target.appendChild(dragged);
+                    }
+                }
+            },
+            onDragEnterHandler : function(event)
+            {
+                const target = event.target;
+                if (target)
+                {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = 'move';                
+                }
+            },
+            onDragOverHandler : function(event)
+            {
+                event.preventDefault();            
+            },
+            onResetBoardButtonClick: function(event)
+            {
+                event.preventDefault();
+                console.log("Reset button clicked");
+                ResetPieces();
+            }
+        }
+
+        var ChessPiece = function(id, code, startLocation)
+        {
+            this.Piece = document.createElement("div");
+            this.Piece.id = id;            
+            this.Piece.innerHTML = code;
+            this.Piece.className = "ChessPiece";
+            this.Piece.setAttribute("draggable", "true");
+            this.Piece.setAttribute("start", startLocation);
+            this.Piece.addEventListener("dragstart", handlers.onDragStartHandler);
+            this.Piece.addEventListener("dragend", handlers.onDragEndHandler);
+            document.body.appendChild(this.Piece);
+        }
+
+        var BoardCell = function(id, color)
+        {
+            this.Div = document.createElement("div");
+            this.Div.id = id;
+            this.CellColor = color;
+            this.Div.className = "BoardCell " + color;                        
+            this.Div.addEventListener('drop', handlers.onDropHandler);
+            this.Div.addEventListener('dragenter', handlers.onDragEnterHandler);
+            this.Div.addEventListener('dragover', handlers.onDragOverHandler);
+            document.getElementById("ChessBoardContainer").appendChild(this.Div);
+        }       
+
+        var ChessBoard = function()
+        {           
+            this.Cells = [];             
+            let columns = ['A','B','C','D','E','F','G','H'];
+            var cellcounter = 0;                          
+            for (var j = 0; j < 8; j++)
+            {
+                for (var i = 0; i < 8; i++)
+                {
+                    var cellName = columns[i] + (j+1);
+                    var color = (cellcounter%2 == 0)? "white" : "black";
+                    this.Cells[cellName] = new BoardCell(cellName, color);
+                    cellcounter += 1;                    
+                }
+                cellcounter += 1;
+            }
+            document.getElementById("resetButton"),addEventListener('click', handlers.onResetBoardButtonClick);
+        };
+
+        var HtmlCodes = {
+            WHITE_KING : "&#9812;",
+            WHITE_QUEEN : "&#9813",
+            WHITE_ROOK : "&#9814",
+            WHITE_BISHOP : "&#9815",
+            WHITE_KNIGHT : "&#9816",
+            WHITE_PAWN : "&#9817",
+            BLACK_KING : "&#9818",
+            BLACK_QUEEN : "&#9819",
+            BLACK_ROOK : "&#9820",
+            BLACK_BISHOP : "&#9821",
+            BLACK_KNIGHT : "&#9822",
+            BLACK_PAWN : "&#9823"
+        };
+
+        var ChessSet = function()
+        {
+            this.white_king = new ChessPiece("white_king", HtmlCodes.WHITE_KING, "E8");
+            this.white_queen = new ChessPiece("white_queen", HtmlCodes.WHITE_QUEEN, "D8");
+            this.white_rook_a = new ChessPiece("white_rook_a", HtmlCodes.WHITE_ROOK, "A8");
+            this.white_rook_h = new ChessPiece("white_rook_h", HtmlCodes.WHITE_ROOK, "H8");
+            this.white_bishop_c = new ChessPiece("white_bishop_c", HtmlCodes.WHITE_BISHOP, "C8");
+            this.white_bishop_f = new ChessPiece("white_bishop_f", HtmlCodes.WHITE_BISHOP, "F8");
+            this.white_knight_b = new ChessPiece("white_knight_b", HtmlCodes.WHITE_KNIGHT, "B8");            
+            this.white_knight_g = new ChessPiece("white_knight_g", HtmlCodes.WHITE_KNIGHT, "G8");            
+            this.black_king = new ChessPiece("black_king", HtmlCodes.BLACK_KING, "E1");
+            this.black_queen = new ChessPiece("black_queen", HtmlCodes.BLACK_QUEEN, "D1");
+            this.black_rook_a = new ChessPiece("black_rook_a", HtmlCodes.BLACK_ROOK, "A1");
+            this.black_rook_h = new ChessPiece("black_rook_h", HtmlCodes.BLACK_ROOK, "H1");            
+            this.black_bishop_c = new ChessPiece("black_bishop_c", HtmlCodes.BLACK_BISHOP, "C1");
+            this.black_bishop_f = new ChessPiece("black_bishop_f", HtmlCodes.BLACK_BISHOP, "F1");
+            this.black_knight_b = new ChessPiece("black_knight_b", HtmlCodes.BLACK_KNIGHT, "B1");
+            this.black_knight_g = new ChessPiece("black_knight_g", HtmlCodes.BLACK_KNIGHT, "G1");
+            this.white_pawn_a = new ChessPiece("white_pawn_a", HtmlCodes.WHITE_PAWN, "A7");
+            this.white_pawn_b = new ChessPiece("white_pawn_b", HtmlCodes.WHITE_PAWN, "B7");
+            this.white_pawn_c = new ChessPiece("white_pawn_c", HtmlCodes.WHITE_PAWN, "C7");
+            this.white_pawn_d = new ChessPiece("white_pawn_d", HtmlCodes.WHITE_PAWN, "D7");
+            this.white_pawn_e = new ChessPiece("white_pawn_e", HtmlCodes.WHITE_PAWN, "E7");
+            this.white_pawn_f = new ChessPiece("white_pawn_f", HtmlCodes.WHITE_PAWN, "F7");
+            this.white_pawn_g = new ChessPiece("white_pawn_g", HtmlCodes.WHITE_PAWN, "G7");
+            this.white_pawn_h = new ChessPiece("white_pawn_h", HtmlCodes.WHITE_PAWN, "H7");
+            this.black_pawn_a = new ChessPiece("black_pawn_a", HtmlCodes.BLACK_PAWN, "A2");            
+            this.black_pawn_b = new ChessPiece("black_pawn_b", HtmlCodes.BLACK_PAWN, "B2");                        
+            this.black_pawn_c = new ChessPiece("black_pawn_c", HtmlCodes.BLACK_PAWN, "C2");            
+            this.black_pawn_d = new ChessPiece("black_pawn_d", HtmlCodes.BLACK_PAWN, "D2");            
+            this.black_pawn_e = new ChessPiece("black_pawn_e", HtmlCodes.BLACK_PAWN, "E2");            
+            this.black_pawn_f = new ChessPiece("black_pawn_f", HtmlCodes.BLACK_PAWN, "F2");                        
+            this.black_pawn_g = new ChessPiece("black_pawn_g", HtmlCodes.BLACK_PAWN, "G2");            
+            this.black_pawn_h = new ChessPiece("black_pawn_h", HtmlCodes.BLACK_PAWN, "H2");            
+        };
+
+        var ResetPieces = function()
+        {
+            console.log("resetting pieces");
+            for (var piece in pieces)
+            {
+                var div = document.getElementById(piece);                
+                var target = document.getElementById(div.getAttribute("start"));                
+                target.appendChild(div);
+            }            
+        }
+
+        var board = new ChessBoard();
+        var pieces = new ChessSet();
+
+        ResetPieces();
+        
+    </script>
+
+    <style>
+    .ChessPiece 
+    {
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    .BoardCell 
+    {
+        border: 1px solid black;    
+        width: 50px;
+        height: 50px;
+        float: left;
+    }
+
+    .BoardCell[id^="A"]
+    {        
+        clear: both;
+    }
+
+    .black
+    {
+        background-color: gray;
+    }
+    </style>
+</body>
+
+</html>
