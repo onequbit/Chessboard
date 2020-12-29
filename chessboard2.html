@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./emojis.css">
+    <link rel="stylesheet" type="text/css" href="./chess.css">
+    
+</head>
+<body>
+    <!-- <div class="emoji poop"></div>
+    <div class="emoji graycircle"></div>
+    <div class="emoji smiley"></div>
+
+    <div class="doublestack">
+        <div class="emoji poop stacked"></div>
+        <div class="emoji smiley stacked"></div>
+    </div>
+    
+    <div class="emoji chesspiece white king" draggable="true"></div>
+    <div class="emoji chesspiece white queen" draggable="true"></div>
+    <div class="emoji chesspiece white rook" draggable="true"></div>
+    <div class="emoji chesspiece white knight" draggable="true"></div>
+    <div class="emoji chesspiece white bishop" draggable="true"></div>
+    <div class="emoji chesspiece white pawn" draggable="true"></div>
+    <div class="emoji chesspiece black king" draggable="true"></div>
+    <div class="emoji chesspiece black queen" draggable="true"></div>
+    <div class="emoji chesspiece black rook" draggable="true"></div>
+    <div class="emoji chesspiece black knight" draggable="true"></div>
+    <div class="emoji chesspiece black bishop" draggable="true"></div>
+    <div class="emoji chesspiece black pawn" draggable="true"></div>     -->
+    <br/>
+    <hr>
+    <br/>
+    <div class="emoji smiley"></div>
+    <chess-piece class="white bishop"></chess-piece>
+</body>
+
+<script>    
+    (function(){
+        try
+        {
+            String.prototype.forEach = function(lambda)
+            {
+                var tokens = this.split(' ');
+                tokens.forEach( item => lambda(item) );
+            };
+            DOMTokenList.prototype.forEach = Array.prototype.forEach;
+            HTMLCollection.prototype.forEach = Array.prototype.forEach;
+        }
+        catch(e) {}
+    })();
+
+    class chess_piece_layer extends HTMLElement
+    {
+        constructor()
+        {
+            super();
+            return this;
+        }
+    }
+
+    class chess_piece extends HTMLElement
+    {
+        constructor()
+        {
+            super();
+            this.draggable = true;
+
+            console.log(this.classList.value);            
+            this.layerAdd("chess-piece-layer back");
+            this.layerAdd("chess-piece-layer front"); 
+            this.pos1 = 0;
+            this.pos2 = 0;
+            this.pos3 = 0;
+            this.pos4 = 0;            
+            // this.addEventListener("contextmenu", this.contextMenu);            
+            this.addEventListener("mousedown", this.mouseDown);  
+            this.addEventListener("mouseup", this.cancelMouse);
+            // this.addEventListener("touchstart", this.touchStart);
+            // this.addEventListener("touchmove", this.touchMove);
+            // this.addEventListener("touchend", this.closeDragElement); 
+            // this.addEventListener("touchenter", this.onMouseOver);                       
+            this.addEventListener("mouseleave", this.closeDragElement);
+            this.addEventListener("mouseexit", this.closeDragElement);
+            return this;
+        }
+
+        layerAdd(classes)
+        {
+            console.log(classes);            
+            var divLayer = document.createElement("chess-piece-layer");
+            this.classList.forEach(className => {
+                divLayer.classList.add(className);
+            });
+            classes.forEach(className => {
+                divLayer.classList.add(className);
+            });        
+            this.appendChild(divLayer);
+        }
+
+        closeDragElement()
+        {                   
+            this.onmousemove = null; 
+            this.style.zIndex = 0;        
+        }
+
+        cancelMouse(e)
+        {
+            this.closeDragElement();
+            console.log(e);
+            // if (e.which() == 3)
+            // {
+            //     this.hideMenu(e);
+            // } else 
+            // {
+            //     this.closeDragElement();
+            // }
+        }
+
+        mouseDown(e) 
+        {        
+            // e.which : 1 => left button, 3 => right button
+            e = e || window.event;
+            e.preventDefault();
+            console.log(e, e.screenX, e.screenY, e.clientX, e.clientY);
+            this.pos3 = e.clientX;
+            this.pos4 = e.clientY;            
+            this.onmousemove = this.mouseMove;
+            // if (e.which() == 1)
+            // {
+            //     this.pos3 = e.clientX;
+            //     this.pos4 = e.clientY;        
+            //     this.onmousemove = this.mouseMove;
+            // }        
+        }
+
+        mouseMove(e) 
+        {        
+            e = e || window.event;
+            e.preventDefault();        
+            console.log(e, e.screenX, e.screenY, e.clientX, e.clientY);
+            this.pos1 = this.pos3 - e.clientX;
+            this.pos2 = this.pos4 - e.clientY;
+            this.pos3 = e.clientX;
+            this.pos4 = e.clientY;            
+            this.style.top = (this.offsetTop - this.pos2) + "px";
+            this.style.left = (this.offsetLeft - this.pos1) + "px";
+            this.style.zIndex++;
+        }
+    }
+
+    customElements.define('chess-piece', chess_piece);
+
+    
+</script>
+
+</html>

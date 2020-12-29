@@ -1,0 +1,36 @@
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+div.stack-container
+{
+    position: relative;
+}
+
+div.stacked
+{
+    position: absolute;
+}
+
+div.emoji
+{    
+    font-family: apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla, segoe ui symbol;
+}
+
+div.emoji.poop::after
+{
+    content: "\1f4a9";
+}
+
+div.emoji.graycircle::after
+{
+    content: "\1f518";
+}
+
+div.emoji.smiley::after
+{
+    content: "\1f600";
+}

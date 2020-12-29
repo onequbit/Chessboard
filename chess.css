@@ -1,0 +1,136 @@
+
+
+/*
+    const prefix = "&#98";
+    const colors = ['WHITE','BLACK'];
+    const ranks = ['KING','QUEEN','ROOK','BISHOP','KNIGHT','PAWN'];
+
+    white chess king	♔	U+2654	&#9812;	&#x2654;
+    white chess queen	♕	U+2655	&#9813;	&#x2655;
+    white chess rook	♖	U+2656	&#9814;	&#x2656;
+    white chess bishop	♗	U+2657	&#9815;	&#x2657;
+    white chess knight	♘	U+2658	&#9816;	&#x2658;
+    white chess pawn	♙	U+2659	&#9817;	&#x2659;
+    black chess king	♚	U+265A	&#9818;	&#x265A;
+    black chess queen	♛	U+265B	&#9819;	&#x265B;
+    black chess rook	♜	U+265C	&#9820;	&#x265C;
+    black chess bishop	♝	U+265D	&#9821;	&#x265D;
+    black chess knight	♞	U+265E	&#9822;	&#x265E;
+    black chess pawn	♟︎	U+265F	&#9823;	&#x265F;
+
+*/
+
+chess-piece
+{
+    position: absolute;
+    font-size: 7vh;
+}
+
+chess-piece-layer
+{
+    position: absolute;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+[draggable="true"] 
+{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor: move;    
+}
+
+/* .stack-container
+{
+    position: relative;
+}
+
+.stacked
+{
+    position: absolute;
+} */
+
+/* .chess-piece
+{
+    font-size: 7vh;
+    position: absolute;
+    
+} */
+
+chess-piece.black
+{
+    text-shadow: 0px 0px 1vh white;
+}
+
+chess-piece.white
+{
+    text-shadow: 0px 0px 1vh none;
+}
+
+chess-piece.white.king::after
+{
+    content: "\2654";
+}
+chess-piece.white.queen::after
+{
+    content: "\2655";
+}
+chess-piece.white.rook::after
+{
+    content: "\2656";
+}
+/* chess-piece.white.bishop::after
+{
+    content: "\2657";
+} */
+chess-piece-layer.white.bishop.back::after
+{
+    color: white;
+    content: "\265d";
+    z-index: -2;
+}
+chess-piece-layer.white.bishop.front::after
+{
+    color: black;
+    content: "\2657";
+    z-index: -1;
+}
+chess-piece.white.knight::after
+{
+    content: "\2658";    
+}
+chess-piece.white.pawn::after
+{
+    content: "\2659";
+}
+
+chess-piece.black.king::after
+{
+    content: "\265a";
+}
+chess-piece.black.queen::after
+{
+    content: "\265b";
+}
+chess-piece.black.rook::after
+{
+    content: "\265c";
+}
+chess-piece.black.bishop::after
+{
+    content: "\265d";
+}
+chess-piece.black.knight::after
+{
+    content: "\265e";    
+}
+chess-piece.black.pawn::after
+{
+    content: "\265f";
+}
