@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">    
+    <script src="jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="./emojis.css">
     <link rel="stylesheet" type="text/css" href="./chess.css">
+
     
 </head>
 <body>    
+    <div class="chess-board">
+
+    </div>
+
     <div class="emoji smiley"></div>
     <chess-piece class="white king"></chess-piece>
     <chess-piece class="white queen"></chess-piece>
@@ -19,14 +27,79 @@
     <chess-piece class="black knight"></chess-piece>
     <chess-piece class="black rook"></chess-piece>  
     <div class="line_break"></div>
-    <div class="test_char">1</div>
-    <div class="test_char">2</div>
-    <div class="test_char">3</div>
-    <div class="test_char">4</div>
-    <div class="test_char">5</div>
-    <div class="test_char">6</div>
-    <div class="test_char">7</div>
-    <div class="test_char">8</div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    <div class="grid_cell"> </div>
+    
+    <div class="test_char" draggable="true">1</div>
+    <div class="test_char" draggable="true">2</div>
+    <div class="test_char" draggable="true">3</div>
+    <div class="test_char" draggable="true">4</div>
+    <div class="test_char" draggable="true">5</div>
+    <div class="test_char" draggable="true">6</div>
+    <div class="test_char" draggable="true">7</div>
+    <div class="test_char" draggable="true">8</div>
 </body>
 
 <script src="TileElement.js"></script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+</head>
+<style>
+    .test
+    {
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <div class="test">Foo!</div>
+</body>
+<script src="library.js"></script>
+<script>
+    // setClassEvent(".test", "mouseover", showPopupOnMouseover);
+    
+    function sizeToView(element)
+    {
+        console.log(element);
+    }
+
+    setOnLoad("test", sizeToView);
+</script>
+</html>

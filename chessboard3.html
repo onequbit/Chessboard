@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <!-- <script src="jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.12.1/jquery-ui.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="./emojis.css">
+    <link rel="stylesheet" type="text/css" href="./chess.css">
+</head>
+<body>    
+    <div class="chess-board">
+
+    </div>
+    <!-- <div class="emoji smiley"></div> -->    
+    <chess-board>
+    <div class="grid_cell"><chess-piece class="empty cell"></chess-piece></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    <div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div><div class="grid_cell"></div>
+    </chess-board>
+    <div class="line_break"></div>
+    <chess-piece class="white king"></chess-piece>
+    <chess-piece class="white queen"></chess-piece>
+    <chess-piece class="white bishop"></chess-piece>
+    <chess-piece class="white knight"></chess-piece>
+    <chess-piece class="white rook"></chess-piece>
+    <chess-piece class="white pawn"></chess-piece>
+    <chess-piece class="black king"></chess-piece>
+    <chess-piece class="black queen"></chess-piece>
+    <chess-piece class="black bishop"></chess-piece>
+    <chess-piece class="black knight"></chess-piece>
+    <chess-piece class="black rook"></chess-piece>
+    <chess-piece class="black pawn"></chess-piece>
+    
+</body>
+
+<script src="TileElement.js"></script>
+<script src="ChessPiece.js"></script>
+<script>    
+    (function(){
+        try
+        {
+            String.prototype.forEach = function(lambda)
+            { 
+                this.split(' ').forEach( item => lambda(item) ); 
+            }            
+
+            DOMTokenList.prototype.forEach = Array.prototype.forEach;
+            HTMLCollection.prototype.forEach = Array.prototype.forEach;            
+            HTMLElement.prototype.getElementSize = function(){
+                var rect = this.getBoundingClientRect();
+                return Math.min(rect.bottom - rect.top, rect.right - rect.left);            
+            };
+        }
+        catch(e) {}
+        
+    })();
+
+    document.getElementsByTagName("chess-piece").forEach( (item,index) => {        
+        // if (!item.id) item.id = "chess-piece_" + index;
+        // item.style.fontSize = "11vh";
+        // $(item).draggable();
+    });
+    
+    // var grid_size = document.getElementsByTagName("chess-piece")[0].getElementSize();
+
+    // window.onload = function() {
+    //     document.getElementsByTagName('chess-piece').forEach((item, i)=>
+    //     {            
+    //         var left_offset = (i+1) * (grid_size);            
+    //         item.style.left = `${left_offset}px`;
+                        
+    //     });        
+    // };
+    
+</script>
+
+</html>

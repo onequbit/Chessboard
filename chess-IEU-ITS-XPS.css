@@ -1,44 +1,17 @@
 body 
 {
     background-color: blanchedalmond;
-    font-family: 'Courier New', Courier, monospace;
-    
 }
 
-.line_break
+chess-piece-layer.back
 {
-    display: block;
-    font-size: 11vh;
+    text-shadow: 1vh white;
 }
 
-.line_break::before
+/* chess-piece-layer.back
 {
-    content: "\A";
-    white-space: pre;
-}
-
-.test_char 
-{
-    float: left;
-    display: inline-table;
-    font-size: 11vh;    
-}
-
-.grid_cell
-{
-    border: 1px solid black;    
-    width: fit-content;
-    margin: 0px;
-    padding: 0px;
-    float: left;
-}
-
-.chess-board
-{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto;
-    /* justify-content: space-evenly; */
-    
+    color: white;    
+    z-index: -2;
 }
 
 /*
@@ -61,41 +34,6 @@ body
     black chess pawn	♟︎	U+265F	&#9823;	&#x265F;
 */
 
-chess-piece
-{
-    display: inline-block;    
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    cursor: grab;
-    position: absolute;
-    /* border: 1px solid black;
-    border-radius: 2vh; */
-    font-size: 10vh;
-    line-height: 1.2;
-    /* background-color: white; */
-    opacity: 1;
-}
-
-.chess-piece-layer
-{
-    border: 1px solid black;
-    border-radius: 2vh;
-}
-
-.chess-piece-layer.back
-{
-    background-color: white;
-    background-clip: text;    
-}
-
-.chess-piece-layer.front
-{
-    /* color: black; */
-}
-
-
 /* 
 [draggable="true"] 
 {
@@ -116,9 +54,17 @@ chess-piece.white
 {
     text-shadow: 0px 0px 1vh none;
 }
-*/
 
-
+/* chess-piece-layer.back
+{
+    color: white;    
+    z-index: -2;
+}
+chess-piece-layer.front
+{
+    color: black;    
+    z-index: -1;
+} */
 
 
 /* 

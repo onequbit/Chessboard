@@ -17,16 +17,7 @@
     <chess-piece class="black queen"></chess-piece>
     <chess-piece class="black bishop"></chess-piece>
     <chess-piece class="black knight"></chess-piece>
-    <chess-piece class="black rook"></chess-piece>  
-    <div class="line_break"></div>
-    <div class="test_char">1</div>
-    <div class="test_char">2</div>
-    <div class="test_char">3</div>
-    <div class="test_char">4</div>
-    <div class="test_char">5</div>
-    <div class="test_char">6</div>
-    <div class="test_char">7</div>
-    <div class="test_char">8</div>
+    <chess-piece class="black rook"></chess-piece>    
 </body>
 
 <script src="TileElement.js"></script>
@@ -50,17 +41,17 @@
         
     })();
 
-    // function getPixelSizeByGridUnits(screen_units)
-    // {
-    //     var cssSize = Math.round(100/screen_units);
-    //     var sizetest = document.createElement("div");
-    //     sizetest.id = "sizetest";
-    //     sizetest.style = `height:${cssSize}vh;width:${cssSize}vw`;
-    //     document.body.append(sizetest);
-    //     size = sizetest.getElementSize();
-    //     document.getElementById("sizetest").remove();
-    //     return size;
-    // }
+    function getPixelSizeByGridUnits(screen_units)
+    {
+        var cssSize = Math.round(100/screen_units);
+        var sizetest = document.createElement("div");
+        sizetest.id = "sizetest";
+        sizetest.style = `height:${cssSize}vh;width:${cssSize}vw`;
+        document.body.append(sizetest);
+        size = sizetest.getElementSize();
+        document.getElementById("sizetest").remove();
+        return size;
+    }
 
     const CHESS_PIECES = 
     {
@@ -96,7 +87,7 @@
             this.color = this.classList[0];
             this.rank = this.classList[1];
             // console.log(this.classList);
-            console.log(this.color, this.rank);
+            // console.log(this.color, this.rank);
             
             if (Object.keys(CHESS_PIECES).indexOf(this.color) < 0)
             {
@@ -113,9 +104,10 @@
             this.layers.back.style.color = "white";
             this.layers.back.style.zIndex = -2;
             this.layers.back.innerHTML = CHESS_PIECES['black'][this.rank];
-            this.layers.back.style.color = "black";
-            this.layers.back.style.zIndex = -1;
-            this.layers.back.innerHTML = CHESS_PIECES[this.color][this.rank];            
+            this.layers.front.style.color = "black";
+            this.layers.front.style.shadow = "white";
+            this.layers.front.style.zIndex = -1;
+            this.layers.front.innerHTML = CHESS_PIECES[this.color][this.rank];            
             return this;
         }         
 
